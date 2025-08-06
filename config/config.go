@@ -11,5 +11,5 @@ var Prefixes = []rune{'!', '.'}
 // administrative privileges. These users can access special commands
 // and perform restricted actions.
 var Owners = []string{
-	"6289513081052",
+	"6281327393959",
 }
