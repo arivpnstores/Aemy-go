@@ -50,7 +50,7 @@ Before you begin, ensure you have Go installed on your system.
 1.  **Clone the Repository**:
 
     ```bash
-    git clone https://github.com/seaavey/Aemy-go.git
+    git clone https://github.com/arivpnstores/Aemy-go.git
     cd Aemy-go
     ```
 
