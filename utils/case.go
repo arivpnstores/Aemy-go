@@ -29,7 +29,7 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 	}
 
 	switch m.Command {
-//--------CASE MENU-------//
+	//--------CASE MENU-------//
 	case "menu":
 		jid := evt.Info.Chat
 
@@ -49,7 +49,7 @@ Silakan ketik salah satu perintah di atas.`
 			logger.Error("Failed to send menu: " + err.Error())
 		}
 
-//--------CASE PING-------//
+//--------CASE PING-------//	
 	case "ping", "uptime":
 		jid := evt.Info.Chat
 		start := time.Now()
@@ -72,7 +72,7 @@ Silakan ketik salah satu perintah di atas.`
 • Total Cpu : %d Core
 • Runtime VPS : %s
 
-*🔵 INFORMATION BOT GOLANG*
+*🔵 INFORMATION GOLANG BOT*
 
 • Respon Speed : %.4f detik
 • Runtime Bot : %s`,
@@ -93,10 +93,8 @@ Silakan ketik salah satu perintah di atas.`
 			logger.Error("Failed to send uptime reply: " + err.Error())
 		}
 	}
-//---------------------//
 }
 
-//--------FUNC PING-------//
 // Fungsi bantu untuk format waktu
 func formatDuration(d time.Duration) string {
 	seconds := int(d.Seconds())
@@ -124,6 +122,7 @@ func formatDuration(d time.Duration) string {
 	return result
 }
 
+//--------FUNC PING-------//
 // RAM total
 func getTotalMemory() string {
 	v, err := mem.VirtualMemory()
