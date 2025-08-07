@@ -8,6 +8,7 @@ require (
 )
 
 require (
+  github.com/shirou/gopsutil v3.23.8+incompatible // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
