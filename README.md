@@ -117,12 +117,10 @@ journalctl -u aemy.service -f
 ```
 
 
-> ⚠️ Make sure the WorkingDirectory and ExecStart paths are correct for your system.
-You can find the correct Go binary path using:
-
+> Auto Update To Github me
 
   ```bash
-which go
+cd ~/Aemy-go && (git remote get-url upstream >/dev/null 2>&1 || git remote add upstream https://github.com/arivpnstores/Aemy-go.git) && git fetch upstream && git checkout main && git reset --hard upstream/main && git clean -f -d && systemctl restart aemy && journalctl -u aemy.service -f
 ```
 
 ## Troubleshooting
