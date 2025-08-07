@@ -23,7 +23,7 @@ import (
 var appStartTime = time.Now()
 
 //OWNER BOT
-const ownerJID = "6281327393959:52@s.whatsapp.net" // Ganti sesuai device JID kamu
+const ownerJID = "6281327393959" // Ganti sesuai device JID kamu
 
 // HandleCommand routes and processes user commands.
 func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Message) {
@@ -54,8 +54,8 @@ Silakan ketik salah satu perintah di atas.`
 //--------CASE JPM-------//
 case "jpm":
 	jid := evt.Info.Chat
-	sender := evt.Info.Sender.String()
-//fmt.Println("Sender JID:", sender) // debug
+	sender := evt.Info.Sender.User
+    //fmt.Println("Sender JID:", sender) // debug
 
 
 	// Cek apakah pengirim bukan owner
