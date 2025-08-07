@@ -29,6 +29,7 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 	}
 
 	switch m.Command {
+//--------CASE PING-------//
 	case "ping", "uptime":
 		jid := evt.Info.Chat
 		start := time.Now()
@@ -72,8 +73,10 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 			logger.Error("Failed to send uptime reply: " + err.Error())
 		}
 	}
+//---------------------//
 }
 
+//--------FUNC PING-------//
 // Fungsi bantu untuk format waktu
 func formatDuration(d time.Duration) string {
 	seconds := int(d.Seconds())
@@ -127,3 +130,4 @@ func getUptime() string {
 	}
 	return formatDuration(time.Duration(uptimeSec) * time.Second)
 }
+//---------------------//
