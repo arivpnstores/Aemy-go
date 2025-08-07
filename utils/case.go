@@ -29,7 +29,7 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 	}
 
 	switch m.Command {
-/--------CASE MENU-------//
+//--------CASE MENU-------//
 	case "menu":
 		jid := evt.Info.Chat
 
