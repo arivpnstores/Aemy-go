@@ -22,6 +22,9 @@ import (
 // Global start time untuk runtime bot
 var appStartTime = time.Now()
 
+//OWNER BOT
+const ownerJID = "6281327393959:52@s.whatsapp.net" // Ganti sesuai device JID kamu
+
 // HandleCommand routes and processes user commands.
 func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Message) {
 	if m.Prefix == "" {
@@ -37,7 +40,7 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 		menuText := `*📋 DAFTAR MENU BOT:*
 
 • *.ping* – Cek status server dan bot
-• *.menu* – Menampilkan menu ini
+• *.jpm* – Promosi All Group
 
 Silakan ketik salah satu perintah di atas.`
 
@@ -48,6 +51,61 @@ Silakan ketik salah satu perintah di atas.`
 		if err != nil {
 			logger.Error("Failed to send menu: " + err.Error())
 		}
+//--------CASE JPM-------//
+case "jpm":
+	jid := evt.Info.Chat
+	sender := evt.Info.Sender.String()
+//fmt.Println("Sender JID:", sender) // debug
+
+
+	// Cek apakah pengirim bukan owner
+	if sender != ownerJID {
+		_, _ = client.SendMessage(context.Background(), jid, &waProto.Message{
+			Conversation: proto.String("❌ Perintah ini hanya untuk owner."),
+		})
+		return
+	}
+
+	// Cek apakah ada teks yang dikirim
+	if m.Text == "" {
+		_, _ = client.SendMessage(context.Background(), jid, &waProto.Message{
+			Conversation: proto.String("Contoh: .jpm Halo semua!"),
+		})
+		return
+	}
+
+	// Ambil semua grup yang sedang diikuti
+	allGroups, err := client.GetJoinedGroups()
+	if err != nil {
+		logger.Error("Gagal mengambil grup: " + err.Error())
+		return
+	}
+
+	totalSent := 0
+	messageText := m.Text
+
+	// Info awal
+	_, _ = client.SendMessage(context.Background(), jid, &waProto.Message{
+		Conversation: proto.String(fmt.Sprintf("Memproses *jpm* ke %d grup...", len(allGroups))),
+	})
+
+	for _, group := range allGroups {
+		// Kirim pesan ke grup
+		_, err := client.SendMessage(context.Background(), group.JID, &waProto.Message{
+			Conversation: proto.String(messageText),
+		})
+		if err == nil {
+			totalSent++
+		}
+
+		// Delay antar pengiriman (misal 5 detik)
+		time.Sleep(3 * time.Second)
+	}
+
+	// Info akhir
+	_, _ = client.SendMessage(context.Background(), jid, &waProto.Message{
+		Conversation: proto.String(fmt.Sprintf("*JPM Selesai ✅*\nTotal grup yang berhasil dikirimi pesan: %d", totalSent)),
+	})
 
 //--------CASE PING-------//	
 	case "ping", "uptime":
