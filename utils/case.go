@@ -29,6 +29,23 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 	}
 
 	switch m.Command {
+//--------CASE MENU-------//
+	case "menu":
+		jid := evt.Info.Chat
+		menuText := `*📋 DAFTAR MENU BOT:*
+
+• *.ping* – Cek status server dan bot
+• *.menu* – Menampilkan menu ini
+
+Silakan ketik salah satu perintah di atas.`
+
+		_, err := client.SendMessage(context.Background(), jid, &waProto.Message{
+			Conversation: proto.String(menuText),
+		})
+		if err != nil {
+			logger.Error("Failed to send menu: " + err.Error())
+		}
+	}
 //--------CASE PING-------//
 	case "ping", "uptime":
 		jid := evt.Info.Chat
