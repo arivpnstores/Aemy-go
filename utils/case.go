@@ -51,7 +51,7 @@ func HandleCommand(client *whatsmeow.Client, m types.Messages, evt *events.Messa
 • Total Cpu : %d Core
 • Runtime VPS : %s
 
-*🔵 INFORMATION Simple Botz*
+*🔵 INFORMATION BOT GOLANG*
 
 • Respon Speed : %.4f detik
 • Runtime Bot : %s`,
