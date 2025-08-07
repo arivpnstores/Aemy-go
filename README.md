@@ -65,6 +65,66 @@ Before you begin, ensure you have Go installed on your system.
     go run main.go
     ```
 
+## Run as a Service (Linux - systemd)
+
+You can run this bot automatically on system boot using systemd.
+
+Step-by-Step
+
+1. Create the service file:
+
+  ```bash
+sudo nano /etc/systemd/system/aemy.service
+```
+
+2. Paste the following configuration (adjust the path if needed):
+ 
+ ```bash
+[Unit]
+Description=Aemy Go WhatsApp Bot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/Aemy-go
+ExecStart=/usr/local/go/bin/go run main.go
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target
+  ```
+
+3. Reload and start the service:
+
+  ```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable aemy.service
+sudo systemctl start aemy.service
+```
+
+4. Check the status:
+
+  ```bash
+systemctl status aemy.service
+```
+
+5. View real-time logs:
+
+  ```bash
+journalctl -u aemy.service -f
+```
+
+
+> ⚠️ Make sure the WorkingDirectory and ExecStart paths are correct for your system.
+You can find the correct Go binary path using:
+
+
+  ```bash
+which go
+```
+
 ## Troubleshooting
 
 ### Error: `go-sqlite3 requires cgo`
